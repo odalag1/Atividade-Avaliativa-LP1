@@ -1,36 +1,38 @@
-#include "contaBancaria.hpp"
+#include "../includes_cpp/contaBancaria.hpp"
 using namespace std;
 #include <iostream>
-class contaBancaria{
-    private:
-    int numeroConta;
-    double saldo;
-    cliente cliente1; //O objeto instaciado da classe tem que ser diferente do nome da classe
-    public:
-    contaBancaria(int n, cliente c){
+
+ //O objeto instaciado da classe tem que ser diferente do nome da classe
+contaBancaria::contaBancaria(int n, cliente c, double s){
+        numeroConta = n;
+        cliente1 = c;
+        saldo = s;
+    }
+   contaBancaria::contaBancaria(int n, cliente c){
         numeroConta = n;
         cliente1 = c;
         saldo = 0.0;
     } 
-    int getNumeroConta(){
+    
+    int contaBancaria::getNumeroConta(){
         return numeroConta;
     }
-    double getSaldo(){
+    double contaBancaria::getSaldo(){
         return saldo;
     }
-    cliente getCliente(){
+    cliente contaBancaria::getCliente(){
         return cliente1;
     }
-    void setNumeroConta(int n){
+    void contaBancaria::setNumeroConta(int n){
         numeroConta = n;
     }
-    void setCliente(cliente c){
+    void contaBancaria::setCliente(cliente c){
         cliente1 = c;
     }
-    void setSaldo(double s){
+    void contaBancaria::setSaldo(double s){
         saldo = s;
     }
-    void depositar(double valor){
+    void contaBancaria::depositar(double valor){
         if(valor > 0){
             saldo += valor;
             cout << "Depósito de R$" << valor << " realizado com sucesso." << endl;
@@ -38,7 +40,7 @@ class contaBancaria{
             cout << "Valor de depósito inválido." << endl;
         }
     }
-    void sacar(double valor){
+    void contaBancaria::sacar(double valor){
         if(valor >=0 && valor <= saldo){
             saldo -=valor;
             cout << "Saque de R$" << valor << " realizado com sucesso." << endl;
@@ -47,33 +49,37 @@ class contaBancaria{
         }
     }
 
-    void transferir(double valor, contaBancaria &destino){
+    void contaBancaria::transferir(double valor, contaBancaria &destino){
         if(valor >= 0 && valor <= saldo){
             double resultado = destino.getSaldo() + valor;
             destino.setSaldo(resultado);
             saldo -= valor;
             cout << "Transferência de R$" << valor << " para a conta " << destino.numeroConta << " realizada com sucesso." << endl;
+        } else if (saldo == 0) {
+            cout <<"Saldo insifuciente." << endl;
         } else {
-            cout <<"Saldo insifuciente ou valor negativo para transferência." << endl;
+            cout <<"Valor negativo para transferência." << endl;
         }
     }
-    void transferir(double valor, contaBancaria &destino1, contaBancaria &destino2){
-        if(valor>=0 && valor <=saldo){
+    void contaBancaria::transferir(double valor, contaBancaria &destino1, contaBancaria &destino2){
+         if(valor <0) {
+            cout <<"Valor negativo para transferência." << endl;
+        } else if (saldo == 0 || saldo < valor) {
+            cout <<"Saldo insifuciente." << endl;
+        }  else {
             double resultado1 = destino1.getSaldo() +(valor/2);
-            double resultado2 = destino1.getSaldo() +(valor/2);
+            double resultado2 = destino2.getSaldo() +(valor/2);
             destino1.setSaldo(resultado1);
             destino2.setSaldo(resultado2);
             saldo -= valor;
-        }else {
-            cout <<"Saldo insifuciente ou valor negativo para transferência." << endl;
+            cout << "Transferência de R$" << valor << " para as contas " << destino1.getNumeroConta() << " e " << destino2.getNumeroConta() << " realizada com sucesso." << endl;
         }
     }
-   void exibirSaldo(){
+   void contaBancaria::exibirSaldo(){
     cout << "Saldo atual: R$" << saldo << endl;
    }
-   void exibirDadosCliente(){ 
+   void contaBancaria::exibirDadosCliente(){ 
     cout << "Nome do cliente:" << cliente1.getNome() << endl;
     cout << "cpf do cliente:" << cliente1.getCpf() << endl;
     
    }
-};  
