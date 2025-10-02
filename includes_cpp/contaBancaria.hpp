@@ -21,5 +21,5 @@ class contaBancaria{
     void transferir(double valor, contaBancaria &destino1,contaBancaria &destino2);
     void exibirSaldo();
     void exibirDadosCliente();
-
+    //modulos get, set, funcoes e construtores criadas para ser implementas nos arquivos .cpp
 };

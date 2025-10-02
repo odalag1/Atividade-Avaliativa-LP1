@@ -1,6 +1,6 @@
-#pragma once
+#pragma once //Para evitar de ser compilado mais de uma vez
 
-using namespace std;
+using namespace std; 
 #include <string>
 class cliente{
     private:
@@ -13,5 +13,5 @@ class cliente{
     string getCpf();
     void setNome(string name);
     void setCpf(string cpf_);
-
-};
+    //funcoes get, set e construtores criadas para ser implementas nos arquivos .cpp
+}; 
