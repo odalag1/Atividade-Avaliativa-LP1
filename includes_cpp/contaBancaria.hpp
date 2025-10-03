@@ -22,4 +22,5 @@ class contaBancaria{
     void exibirSaldo();
     void exibirDadosCliente();
     //modulos get, set, funcoes e construtores criadas para ser implementas nos arquivos .cpp
+    //modularizei os metodos para treinar mais entender melhor o conceito de classes e objetos
 };
